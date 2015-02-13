@@ -61,9 +61,9 @@ describe WashOut::Dispatcher do
       allow(dispatcher).to receive(:xml_data).and_return(:empty => { :"@xsi:type" => "xsd:string" })
     end
 
-    it "should handle empty strings that have been parsed wrong by nori" do
+    it "not remove attributes" do
       dispatcher._map_soap_parameters
-      expect(dispatcher.params).to eq('empty' => nil)
+      expect(dispatcher.params).to eq('empty' => "{:\"@xsi:type\"=>\"xsd:string\"}")
     end
   end
 

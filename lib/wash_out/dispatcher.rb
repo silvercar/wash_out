@@ -35,10 +35,8 @@ module WashOut
       strip_empty_nodes = lambda{|hash|
         hash.keys.each do |key|
           if hash[key].is_a? Hash
-            value = hash[key].delete_if{|k, v| k.to_s[0] == '@'}
-
-            if value.length > 0
-              hash[key] = strip_empty_nodes.call(value)
+            if hash[key].length > 0
+              hash[key] = strip_empty_nodes.call(hash[key])
             else
               hash[key] = nil
             end
@@ -46,6 +44,11 @@ module WashOut
         end
 
         hash
+      }
+      convert_attribute_keys = lambda {|hash|  
+        hash.keys.each do |key|
+
+        end
       }
       @_params = _load_params(action_spec[:in], strip_empty_nodes.call(xml_data))
     end
